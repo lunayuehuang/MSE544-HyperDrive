@@ -21,18 +21,19 @@ Tutorial for MSE 544 Azure ML HyperDrive
     ```
 3. Clone the repository we will be using
     ```
-    git clone https://github.com/lunayuehuang/MSE544-HyperDrive.git
+    git clone https://github.com/txie-93/cgcnn.git
     ```
 4. Insert the following lines into "main.py" beginning on line 23
     ```
     from azureml.core import Run
     run = Run.get_context()
     ```
+    where ```Run``` is an azure class designed for experiment runs. The ```get_context``` function pulls the current service context for logging metrics. 
 5. Insert the following line in "main.py" right before the "else" statement in line 196
     ```
     run.log("MAE", np.float(mae_error.item()))
     ```
-
+    where ```log``` allows you to define and print the metric you are interested in. We will be using the mean absolute error for this experiment.
 ## Part II: Setting up the Notebook
 1. Make a jupyter notebook called "hyperdrive_experiment"
 2. Insert a cell with the following imports
@@ -62,6 +63,12 @@ Tutorial for MSE 544 Azure ML HyperDrive
     cgcnn_env = Environment.from_conda_specification(name='cgcnn_env', file_path='cgcnn_env.yml')
     ```
 6. Configurate the base training session
+    Here we are configuring our experiment, as we have done in previous tutorials.
+    - *source_directory:* indicates the (working) directory our scripts can be found
+    - *script:* defines the python script we want to run
+    - *compute_target:* tells Azure where we want to run this experiment
+    - *environment:* initiates the predefined environment needed to succesfully run this experiment
+    - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted previously
     ```
     config = ScriptRunConfig(source_directory='./',   
                              script='main-hyper.py',       
@@ -75,7 +82,9 @@ Tutorial for MSE 544 Azure ML HyperDrive
                                  dataset.as_named_input('input').as_mount()]                   
                              )
     ```
-7. Define the parameters you are interested in sampling
+7. Define the parameters you are interested in sampling <font color="red"> UPDATE THIS</font> 
+
+    In setting up our search space, we have the option of defining discrete or continous hyperparameter spaces where the former is initiated by "choice" and the latter can be requested via "uniform" (amongst others)
     ```
     param_sampling = GridParameterSampling( {
             "batch-size": choice(16, 64, 128),
@@ -83,6 +92,12 @@ Tutorial for MSE 544 Azure ML HyperDrive
         }
     )
     ```
+
+    There are three different methods in which the hyperparameter space can be sampled: 
+    i. *Random sampling*: hyperparameters are randomly selected from the defined search space 
+    ii. *Grid sampling*: hyperparameters are selected such that all possible combinations are explored during experimentation (computationally expensive)
+    iii. *Bayesian sampling*: hyperparameters are selected based on the outcomes of previous experiments; each subsequent run should be an improvement over the previous
+    (See reference I. for addition details)
 8. Configure the hyperdrive experiment
     ```
     hd_config = HyperDriveConfig(run_config=config,
@@ -102,3 +117,4 @@ Tutorial for MSE 544 Azure ML HyperDrive
 ## Part III: Running the Experiment
 1. (Instructions for NAVIGATING AROUND AZURE)
 # References
+I. [Hyperparameter tuning models using Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters#define-search-space)
