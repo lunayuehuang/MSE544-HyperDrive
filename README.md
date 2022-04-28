@@ -35,17 +35,18 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
 5. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 ### Part II: Build the Notebook
-1. Make a jupyter notebook called "hyperdrive_experiment" - make sure this notebook is in the same directory as the "main.py" python script
+1. Make a jupyter notebook called "hyperdrive_experiment" 
+    - make sure this notebook is in the same directory as the "main.py" python script
 2. Insert a cell with the following imports
     ```
     from azureml.core import Workspace, Experiment, Environment, ScriptRunConfig, Dataset, Run
     import azureml
-    import os, tempfile, tarfile
     from azureml.train.hyperdrive import BayesianParameterSampling
     from azureml.train.hyperdrive import normal, uniform, choice
     from azureml.core.run import Run
     from azureml.train.hyperdrive import HyperDriveConfig, PrimaryMetricGoal
     ```
+    From the core tools package, we will import the standard classes for running jobs on Azure then we will import tools specific for hyperdrive to fine-tune our experiment.
 3. Initialize a workspace in the next cell (be sure to enter the appropriate information)
     ```
     subscription_id = <INSERT HERE>
@@ -54,21 +55,28 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
     ws = Workspace(subscription_id, resource_group, workspace_name)
     experiment = Experiment(workspace=ws, name='hyperdrive_experiment')
     ```
-4. Create a "dataset" variable to represent the .cif files we will use for training - <font color="red">THIS NEEDS TO BE UPDATED TO WORK WITH A KEY</font>
+    - *Workspace:* resource used for experimenting, training, and deploying machine learning models
+    - *Experiment:* defines the entry point for experiments in Azure. This is nothing more than a container that holds all of the runs you have submitted 
+
+4. Create a "dataset" variable that points to the data storage account holding the .cif files that we will use for training - <font color="red">THIS NEEDS TO BE UPDATED TO WORK WITH A KEY</font>
     ```
     dataset = Dataset.get_by_name(ws, name='materials_project_3207_unzipped')
     ```
+    - *Dataset:* allows access to data in datastores (hosted on Azure) or from URLs that are publicly available
+
 5. Set an environment variable using the .yml file
     ```
     cgcnn_env = Environment.from_conda_specification(name='cgcnn_env', file_path='cgcnn_env.yml')
     ```
+    - *Environment:* builds a reproducible python environment for the experiments to run in
+
 6. Configurate the base training session
     Here we are configuring our experiment, as we have done in previous tutorials.
     - *source_directory:* indicates the (working) directory our scripts can be found
     - *script:* defines the python script we want to run
     - *compute_target:* tells Azure where we want to run this experiment
     - *environment:* initiates the predefined environment needed to succesfully run this experiment
-    - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted previously
+    - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted 
     ```
     config = ScriptRunConfig(source_directory='./',   
                              script='main-hyper.py',       
@@ -79,11 +87,16 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
                                 '--train-ratio', 0.6,
                                 '--val-ratio', 0.2,
                                 '--test-ratio', 0.2, 
-                                 dataset.as_named_input('input').as_mount()]                   
+                                 dataset.as_mount()]                   
                              )
     ```
-7. Define the parameters you are interested in sampling
+    - *ScriptRunConfig:* establishes the configuration information needed (python script, compute target, ...) to run the machine learning experiment
 
+7. Define the parameters you are interested in sampling
+    There are three different methods in which the hyperparameter space can be sampled: 
+        i. *Random sampling*: hyperparameters are randomly selected from the defined search space 
+        ii. *Grid sampling*: hyperparameters are selected such that all possible combinations are explored during experimentation (computationally expensive)
+        iii. *Bayesian sampling*: hyperparameters are selected based on the outcomes of previous experiments; each subsequent run should be an improvement over the previous
     In setting up our search space, we have the option of defining discrete or continous hyperparameter spaces where the former is initiated by "choice" and the latter can be requested via "uniform" (amongst others)
     ```
     param_sampling = BayesianParameterSampling( {
@@ -93,11 +106,8 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
     }
     )
     ```
-    There are three different methods in which the hyperparameter space can be sampled: 
-    i. *Random sampling*: hyperparameters are randomly selected from the defined search space 
-    ii. *Grid sampling*: hyperparameters are selected such that all possible combinations are explored during experimentation (computationally expensive)
-    iii. *Bayesian sampling*: hyperparameters are selected based on the outcomes of previous experiments; each subsequent run should be an improvement over the previous
     (See reference I. for addition details)
+
 8. Configure the hyperdrive experiment
     ```
     hd_config = HyperDriveConfig(run_config=config,
@@ -125,6 +135,7 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
     A. Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. 
     B. Visualization of the MAE for each run as they progressed
     C. Chart correlating the hyperparameters selected for each run and the calculated MAE 
+        - select the drop-down menu right above this plot to visualize the data in different dimensions
 
 
 
