@@ -79,7 +79,7 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
     - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted 
     ```
     config = ScriptRunConfig(source_directory='./',   
-                             script='main-hyper.py',       
+                             script='main.py',       
                              compute_target='<INSERT HERE>', 
                              environment=cgcnn_env,
                              arguments=[
