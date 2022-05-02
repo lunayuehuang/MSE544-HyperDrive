@@ -7,11 +7,14 @@
 </font>
 
 # MSE544-HyperDrive Experiment
- 
+## HyperDrive
+HyperDrive is a machine learning package found within Azure that aids in hyperparameter tuning/optimization. Hyperparameters are the parameters initialized before training that influence how the model trains and ultimately how the finished model performs. Examples of hyperparameters include: batch size, learning rate, number of layers in the nerual network, the optimizer (e.g. Adam vs SGD), etc.
+Typically, the obejctive, when hyperparameter tuning, is to find the combination of hyperparameters that gives the best performing model. Azure has developed a package to make this discovery process much easier.  
+This tutorial will walk you through how to set up and run this process. 
 ## Repository Background
 The framework presented in this work introduces the crystal graph convolution neural networks (CGCNN), which are designed to represent periodic crystal systems and predict material properties at DFT level accuracy and propose chemical insight. Read more about this study [here](https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.120.145301).  
 ## Dataset Introduction
-A collection of 3,210 .cif crystal structures have been extracted from the "materials project" website and consolidated into Azure data storage. <font color="red">be more detailed </font> 
+A collection of 3,207 .cif crystal structures have been extracted from the "materials project" website and consolidated into an Azure data storage. <font color="red">be more detailed </font> 
 
 -----------------------------------
 ## Instructions
@@ -72,11 +75,6 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
 
 6. Configurate the base training session
     Here we are configuring our experiment, as we have done in previous tutorials.
-    - *source_directory:* indicates the (working) directory our scripts can be found
-    - *script:* defines the python script we want to run
-    - *compute_target:* tells Azure where we want to run this experiment
-    - *environment:* initiates the predefined environment needed to succesfully run this experiment
-    - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted 
     ```
     config = ScriptRunConfig(source_directory='./',   
                              script='main.py',       
@@ -91,12 +89,17 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
                              )
     ```
     - *ScriptRunConfig:* establishes the configuration information needed (python script, compute target, ...) to run the machine learning experiment
+    - *source_directory:* indicates the (working) directory our scripts can be found
+    - *script:* defines the python script we want to run
+    - *compute_target:* tells Azure where we want to run this experiment
+    - *environment:* initiates the predefined environment needed to succesfully run this experiment
+    - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted 
 
 7. Define the parameters you are interested in sampling
     There are three different methods in which the hyperparameter space can be sampled: 
-        i. *Random sampling*: hyperparameters are randomly selected from the defined search space 
-        ii. *Grid sampling*: hyperparameters are selected such that all possible combinations are explored during experimentation (computationally expensive)
-        iii. *Bayesian sampling*: hyperparameters are selected based on the outcomes of previous experiments; each subsequent run should be an improvement over the previous
+        i. *Random sampling*: hyperparameters are randomly selected from the defined search space \
+        ii. *Grid sampling*: hyperparameters are selected such that all possible combinations are explored during experimentation (computationally expensive)\
+        iii. *Bayesian sampling*: hyperparameters are selected based on the outcomes of previous experiments; each subsequent run should be an improvement over the previous\
     In setting up our search space, we have the option of defining discrete or continous hyperparameter spaces where the former is initiated by "choice" and the latter can be requested via "uniform" (amongst others)
     ```
     param_sampling = BayesianParameterSampling( {
@@ -117,7 +120,15 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
                                  max_total_runs=8,
                                  max_concurrent_runs=4)
     ```
-9. Finally, run the experiment and monitor the progress at the printed url
+    - *HyperDriveConfig:* establishes the configuration information about the hyperparameters and relevant metrics needed to run the HyperDrive experiment
+    - *run_config:* instructions on how to set up the script runs (see step 6)
+    - *hyperparameter_sampling:* this is where the hyperparameter sampling space is specified, we have outlined the relevant hyperparameters and their respective spaces above in step 7
+    - *primary_metric_name:* define the metric of interest (in this case, we are interested in the mean absolute error, MAE)
+    - *primary_metric_goal:* decide how you want to evaluate your experiment (maximize or minimize the primary metric)
+    - *max_total_runs:* specify the number of runs you would like your experiment to complete (the default is 10080!)
+    - *max_concurrent_runs:* indicates the number of runs you would like to run concurrently, if a value is not specified, all runs will execute simultaneously 
+
+9. Finally, run the experiment and monitor the progress using the printed url
     ```
     run = experiment.submit(hd_config)
     aml_url = run.get_portal_url()
@@ -127,14 +138,14 @@ A collection of 3,210 .cif crystal structures have been extracted from the "mate
 ### Part III: Running the Experiment and Navigating Azure
 1. When you follow the url printed in step 9 of part II, you should find a page that looks something like this:
 <img src="./images/follow_url_notes.png" style="height: 90%; width: 90%;"/>
-    A. Pathway to the experiment we are running 
-    B. Name of the current experiment - this is easily edited to something more meaningful by selecting the pencil symbol 
-    C. Tab showing the various runs that will be submitted during the experiment
+    A. Pathway to the experiment we are running\ 
+    B. Name of the current experiment - this is easily edited to something more meaningful by selecting the pencil symbol\
+    C. Tab showing the various runs that will be submitted during the experiment\
 2. Select the "child runs" tab to view the following page:
 <img src="./images/child_runs_notes.png" style="height: 90%; width: 90%;"/>
-    A. Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. 
-    B. Visualization of the MAE for each run as they progressed
-    C. Chart correlating the hyperparameters selected for each run and the calculated MAE 
+    A. Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. \
+    B. Visualization of the MAE for each run as they progressed\
+    C. Chart correlating the hyperparameters selected for each run and the calculated MAE \
         - select the drop-down menu right above this plot to visualize the data in different dimensions
 
 
