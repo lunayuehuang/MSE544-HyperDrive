@@ -145,13 +145,19 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     </ol>
 2. Select the "child runs" tab to view the following page:
 <img src="./images/child_runs_notes.png" style="height: 90%; width: 90%;"/>
-    A. Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. \
-    B. Visualization of the MAE for each run as they progressed\
-    C. Chart correlating the hyperparameters selected for each run and the calculated MAE \
+    <ol type="A">
+    <li> Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. </li>
+    <li> Visualization of the MAE for each run as they progressed</li>
+    <li> Chart correlating the hyperparameters selected for each run and the calculated MAE </li>
         - select the drop-down menu right above this plot to visualize the data in different dimensions
-
-
-
-
+    </ol>
+3. Select one of your child runs to further investigate by clicking on the display name
+<img src="./images/single_child_run_notes.png" style="height: 90%; width: 90%;"/>
+We find a lot of useful information here 
+    <ol type="A">
+    <li>Here are the hyperparameters that were selected and used for this run, this is variable for every child run in this experiment </li> 
+    <li>An overview of the changing MAE is listed so we can easily see how it changed during the run </li>
+    <li>Here are a list of the arguments that are given to our script, notice how are sampled hyperparameters from a. are used here an input </li>
+    </ol>
 # References
 I. [Hyperparameter tuning models using Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters#define-search-space)
