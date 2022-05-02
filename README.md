@@ -8,7 +8,7 @@
 
 # MSE544-HyperDrive Experiment
 ## HyperDrive
-HyperDrive is a machine learning package found within Azure that aids in hyperparameter tuning/optimization. Hyperparameters are the parameters initialized before training that influence how the model trains and ultimately how the finished model performs. Examples of hyperparameters include: batch size, learning rate, number of layers in the nerual network, the optimizer (e.g. Adam vs SGD), etc.
+HyperDrive is a machine learning package found within Azure that aids in hyperparameter tuning/optimization. Hyperparameters are the parameters initialized before training that influence how the model trains and ultimately how the finished model performs. Examples of hyperparameters include: batch size, learning rate, number of layers in the nerual network, the optimizer (e.g. Adam vs SGD), etc.\
 Typically, the obejctive, when hyperparameter tuning, is to find the combination of hyperparameters that gives the best performing model. Azure has developed a package to make this discovery process much easier.  
 This tutorial will walk you through how to set up and run this process. 
 ## Repository Background
@@ -96,7 +96,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted 
 
 7. Define the parameters you are interested in sampling
-    There are three different methods in which the hyperparameter space can be sampled: 
+    There are three different methods in which the hyperparameter space can be sampled: \
         i. *Random sampling*: hyperparameters are randomly selected from the defined search space \
         ii. *Grid sampling*: hyperparameters are selected such that all possible combinations are explored during experimentation (computationally expensive)\
         iii. *Bayesian sampling*: hyperparameters are selected based on the outcomes of previous experiments; each subsequent run should be an improvement over the previous\
@@ -138,9 +138,11 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 ### Part III: Running the Experiment and Navigating Azure
 1. When you follow the url printed in step 9 of part II, you should find a page that looks something like this:
 <img src="./images/follow_url_notes.png" style="height: 90%; width: 90%;"/>
-    A. Pathway to the experiment we are running\ 
-    B. Name of the current experiment - this is easily edited to something more meaningful by selecting the pencil symbol\
-    C. Tab showing the various runs that will be submitted during the experiment\
+    <ol type="A">
+    <li> Pathway to the experiment we are running</li> 
+    <li> Name of the current experiment - this is easily edited to something more meaningful by selecting the pencil symbol</li>
+    <li> Tab showing the various runs that will be submitted during the experiment</li>
+    </ol>
 2. Select the "child runs" tab to view the following page:
 <img src="./images/child_runs_notes.png" style="height: 90%; width: 90%;"/>
     A. Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. \
