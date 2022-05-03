@@ -37,7 +37,33 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     ````
 5. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
-### Part II: Build the Notebook
+### Part II: Create an AML dataset linked to an Azure storage account 
+1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
+<img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
+
+2. Input all the information as shown in the screen shot below, and makesure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2020-08-04&ss=b&srt=co&sp=rlitfx&se=2022-07-02T02:55:20Z&st=2022-05-01T18:55:20Z&spr=https&sig=9P04kUW8p%2BsaX%2BJEkA%2FNNuWX1f7TNpOiKr1OS6dJARM%3D```, and then hit create. By creating a datastore, you link your workspace with an created storage account that already exists. In this way, multiple users can share the same data without having to copy the data intou your own workspace, therefore save the cost of data storage.  
+<img src="./images/Datastore_image1.png" style="height: 90%; width: 40%;"/>
+
+3. Now let's create a dataset from datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
+<img src="./images/Datastore_image2.png" style="height: 90%; width: 90%;"/>
+
+4. Give a name to your dataset ```materials_hyperdrive_dataset", select Dataset type as "File" and hit Next
+<img src="./images/Datastore_image3.png" style="height: 90%; width: 90%;"/>
+
+5. In the prompt of Select or create a datastore, choose "hyperdrivetutorial" from the pull down menu (Note, since you have already link your datastore to the storage account, you should be able to select this existing one), and then choose the path to be ** and unclick "Skip data validation" hit next 
+<img src="./images/Datastore_image5.png" style="height: 90%; width: 90%;"/>
+
+6. Double check the informaiton and hit Create
+<img src="./images/Datastore_image6.png" style="height: 90%; width: 90%;"/>
+
+7. Now if you go back to your ML workspace home and click datasets, you will be able to see the one you just created. 
+<img src="./images/Datastore_image7.png" style="height: 90%; width: 90%;"/>
+
+8. Click the dataset, and click explore, you can see preview the files in your dataset. 
+<img src="./images/Datastore_image8.png" style="height: 90%; width: 90%;"/>
+
+
+### Part III: Build the Notebook
 1. Make a jupyter notebook called "hyperdrive_experiment" 
     - make sure this notebook is in the same directory as the "main.py" python script
 2. Insert a cell with the following imports
