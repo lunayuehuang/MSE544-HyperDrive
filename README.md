@@ -87,9 +87,9 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     - *Workspace:* resource used for experimenting, training, and deploying machine learning models
     - *Experiment:* defines the entry point for experiments in Azure. This is nothing more than a container that holds all of the runs you have submitted 
 
-4. Create a "dataset" variable that points to the data storage account holding the .cif files that we will use for training - <font color="red">THIS NEEDS TO BE UPDATED TO WORK WITH A KEY</font>
+4. Create a "dataset" variable that points to the data storage account holding the .cif files that we will use for training
     ```
-    dataset = Dataset.get_by_name(ws, name='materials_project_3207_unzipped')
+    dataset = Dataset.get_by_name(ws, name='materials_hyperdrive_dataset')
     ```
     - *Dataset:* allows access to data in datastores (hosted on Azure) or from URLs that are publicly available
 
