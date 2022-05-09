@@ -35,7 +35,12 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     ```
     cd cgcnn
     ````
-5. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
+6. Starting at line 20 of the 'main.py' file, add the following two lines:
+    ```
+    from azureml.core import Run
+    run = Run.get_context()
+    ```
+7. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 ### Part II: Create an AML dataset linked to an Azure storage account 
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
