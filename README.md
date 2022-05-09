@@ -35,12 +35,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     ```
     cd cgcnn
     ````
-6. Starting at line 20 of the 'main.py' file, add the following two lines:
-    ```
-    from azureml.core import Run
-    run = Run.get_context()
-    ```
-7. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
+5. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 ### Part II: Create an AML dataset linked to an Azure storage account 
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
@@ -70,7 +65,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 
 ### Part III: Build the Notebook
 1. Make a jupyter notebook called "hyperdrive_experiment" 
-    - make sure this notebook is in the same directory as the "main.py" python script
+    - make sure this notebook is in the same directory as the "main-hyper.py" python script
 2. Insert a cell with the following imports
     ```
     from azureml.core import Workspace, Experiment, Environment, ScriptRunConfig, Dataset, Run
@@ -108,7 +103,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     Here we are configuring our experiment, as we have done in previous tutorials.
     ```
     config = ScriptRunConfig(source_directory='./',   
-                             script='main.py',       
+                             script='main-hyper.py',       
                              compute_target='<INSERT HERE>', 
                              environment=cgcnn_env,
                              arguments=[
