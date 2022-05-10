@@ -76,7 +76,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 
 ### Part III: Build the Notebook
 1. Make a jupyter notebook called "hyperdrive_experiment" 
-    - make sure this notebook is in the same directory as the "main-hyper.py" python script
+    - make sure this notebook is in the same directory as the "main.py" python script
 2. Insert a cell with the following imports
     ```
     from azureml.core import Workspace, Experiment, Environment, ScriptRunConfig, Dataset, Run
@@ -114,7 +114,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     Here we are configuring our experiment, as we have done in previous tutorials.
     ```
     config = ScriptRunConfig(source_directory='./',   
-                             script='main-hyper.py',       
+                             script='main.py',       
                              compute_target='<INSERT HERE>', 
                              environment=cgcnn_env,
                              arguments=[
