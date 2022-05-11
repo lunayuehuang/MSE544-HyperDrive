@@ -53,7 +53,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 <img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
 
 2. Input all the information as shown in the screen shot below, and makesure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2020-08-04&ss=b&srt=co&sp=rlitfx&se=2022-07-02T02:55:20Z&st=2022-05-01T18:55:20Z&spr=https&sig=9P04kUW8p%2BsaX%2BJEkA%2FNNuWX1f7TNpOiKr1OS6dJARM%3D```, and then hit create. By creating a datastore, you link your workspace with an created storage account that already exists. In this way, multiple users can share the same data without having to copy the data intou your own workspace, therefore save the cost of data storage.  
-<img src="./images/Datastore_image1.png" style="height: 90%; width: 40%;"/>
+<img src="./images/Datastore_image1.png" style="height: 90%; width: 90%;"/>
 
 3. Now let's create a dataset from datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
 <img src="./images/Datastore_image2.png" style="height: 90%; width: 90%;"/>
