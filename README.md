@@ -83,9 +83,10 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 
 
 ### Part IV: Build the Notebook
+Now let's the part B of the hyperdrive process which is create a submission file for your AML experiment. 
 1. Make a jupyter notebook called "hyperdrive_experiment" 
     - make sure this notebook is in the same directory as the "main.py" python script
-2. Insert a cell with the following imports
+2. Insert a cell with the following imports, make sure you have already ```pip install azureml-train``` for the kernel you have chosen. 
     ```
     from azureml.core import Workspace, Experiment, Environment, ScriptRunConfig, Dataset, Run
     import azureml
