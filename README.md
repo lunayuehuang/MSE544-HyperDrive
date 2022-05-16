@@ -12,7 +12,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 -----------------------------------
 ## Instructions
 ### Part I: Set up the repository
-1. Make a directory 
+1. Make a directory for this tutorial at your desired location on your computer. 
     ``` 
     mkdir MSE544-Hyperdrive
     ```
