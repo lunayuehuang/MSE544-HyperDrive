@@ -143,7 +143,7 @@ Now let's the part B of the hyperdrive process which is create a submission file
     - *ScriptRunConfig:* establishes the configuration information needed (python script, compute target, ...) to run the machine learning experiment
     - *source_directory:* indicates the (working) directory our scripts can be found
     - *script:* defines the python script we want to run
-    - *compute_target:* tells Azure where we want to run this experiment
+    - *compute_target:* tells Azure where we want to run this experiment, this should be the name of your GPU cluster that you created in the Yolov5 tutorial
     - *environment:* initiates the predefined environment needed to succesfully run this experiment
     - *arguments:* allows us to define some constant parameters that the experiment should use (i.e. ratio of data allocatted to the test, validation, and training set). Notice we also input our dataset here, which we have mounted 
 
