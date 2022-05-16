@@ -1,16 +1,9 @@
-<font color="red"># TO DO: 
-- Include screenshots
-- Include detail/descriptions of what is happening
-- Include other options not mentioned in tutorial (i.e. sampling types)
-- Properly format document 
-- Proof read & spell check
-</font>
 
 # MSE544-HyperDrive Experiment
 ## HyperDrive
-HyperDrive is a machine learning package found within Azure that aids in hyperparameter tuning/optimization. Hyperparameters are the parameters initialized before training that influence how the model trains and ultimately how the finished model performs. Examples of hyperparameters include: batch size, learning rate, number of layers in the nerual network, the optimizer (e.g. Adam vs SGD), etc.\
-Typically, the obejctive, when hyperparameter tuning, is to find the combination of hyperparameters that gives the best performing model. Azure has developed a package to make this discovery process much easier.  
-This tutorial will walk you through how to set up and run this process. 
+HyperDrive is a machine learning package found within Azure that aids in hyperparameter tuning/optimization. Hyperparameters are the parameters initialized before training that influence how the model trains and ultimately how the finished model performs. Examples of hyperparameters include: batch size, learning rate, number of layers in the neural network, the optimizer (e.g. Adam vs SGD), etc.\
+Typically, the objective, when hyperparameter tuning, is to find the combination of hyperparameters that gives the best performing model. Azure has developed a package to make this discovery process much easier.  
+This tutorial will walk you through how to set up and run this package to optimize a machine learning model. 
 ## Repository Background
 The framework presented in this work introduces the crystal graph convolution neural networks (CGCNN), which are designed to represent periodic crystal systems and predict material properties at DFT level accuracy and propose chemical insight. Read more about this study [here](https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.120.145301).  
 ## Dataset Introduction
