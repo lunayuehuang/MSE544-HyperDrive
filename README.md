@@ -42,18 +42,18 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     cd cgcnn
     ```
    In cgcnn directory, you have a main.py file, this the main model training file for cgcnn. Open this file using your VScode/Open file, or any editor you prefer. 
-2. In main.py add the following     Starting at line 20 of the 'main.py' file, add the following two lines:
+2. In main.py we first need to import azureml library so that certain function. To make our file more consistant, please at the follwing two linse starting at line 20 of the 'main.py' file right after all the other imports: 
     ```
     from azureml.core import Run
     run = Run.get_context()
     ```
     The 'run' variable will represent the run of your hyperdrive experiment and 'get_context' will return the current context for logging metrics. We will be looking at specifically the mean absolute error (see next step).
-3. Add the following line right before the 'else' statement in line 191:
+3. Then, we need to indicate what the metrics for us to track which sets of hyperparameters perform the best. In this experiment, we choose mae to be the metrics to optimize. In the main.py, search where best_mae_error is defined, the line looks like '''best_mae_error = min(mae_error, best_mae_error)''', right after that add the following line right before the 'else' statement   
     ```
     run.log("MAE", np.float(mae_error.item()))
     ```
-    This line is cruical for logging the metric (MAE) for your run.
-7. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
+    This line is cruical for logging the metric (MAE) for your experiment running on AzureML using hyperdrive. 
+4. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 ### Part II: Create an AML dataset linked to an Azure storage account 
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
