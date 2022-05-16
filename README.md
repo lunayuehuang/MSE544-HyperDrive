@@ -120,7 +120,7 @@ Now let's the part B of the hyperdrive process which is create a submission file
     - *Environment:* builds a reproducible python environment for the experiments to run in
 
 6. Configurate the base training session
-    Here we are configuring our experiment, as we have done in previous tutorials.
+    Here we are configuring our experiment, as we have done in previous tutorials. Make sure you choose the compute_target as the compute cluster you have created using YoloV5 tutorial. 
     ```
     config = ScriptRunConfig(source_directory='./',   
                              script='main.py',       
