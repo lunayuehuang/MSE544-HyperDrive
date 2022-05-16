@@ -7,7 +7,7 @@ This tutorial will walk you through how to set up and run this package to optimi
 ## Repository Background
 The framework presented in this work introduces the crystal graph convolution neural networks (CGCNN), which are designed to represent periodic crystal systems and predict material properties at DFT level accuracy and propose chemical insight. Read more about this study [here](https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.120.145301).  
 ## Dataset Introduction
-A collection of 3,207 .cif crystal structures have been extracted from the "materials project" website and consolidated into an Azure data storage. <font color="red">be more detailed </font> 
+A collection of 3,207 .cif crystal structures have been extracted from the "materials project" website and consolidated into an Azure data storage. Detailed explanation of cif files can found [here](https://www.ccdc.cam.ac.uk/Community/depositastructure/cifsyntax/). 
 
 -----------------------------------
 ## Instructions
