@@ -157,7 +157,7 @@ Now let's the part B of the hyperdrive process which is create a submission file
     ```
     (See reference I. for addition details)
 
-8. Configure the hyperdrive experiment
+8. Configure the hyperdrive experiment, the most important is the primary_metric_name, which we ask hyperdrive to track to find the minimum, 
     ```
     hd_config = HyperDriveConfig(run_config=config,
                                  hyperparameter_sampling=param_sampling,
