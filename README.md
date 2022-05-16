@@ -54,7 +54,13 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     ```
     This line is crucial for logging the metric (MAE) for your experiment running on AzureML using hyperdrive. 
     Save your main.py file. 
-4. Download the .yml file from [Canvas](https://canvas.uw.edu/courses/1546761/files/91469595?wrap=1) and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
+4. We need to copy the model files resulting from the training to the ./outputs folder so that we can access and use them later. For that, in the ```main.py``` file, add the following before the ```# test best model``` line, at the same indentation as that line.
+   ```
+      # Now let's copy the model files that were saved using save_checkpoint() function
+      # to the outputs folder so we can use them later for inference.
+      os.system('cp *.pth.tar ./outputs/') 
+   ```
+6. Download the .yml file from [Canvas](https://canvas.uw.edu/courses/1546761/files/91469595?wrap=1) and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 ### Part III: Create an AML dataset linked to an Azure storage account 
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
