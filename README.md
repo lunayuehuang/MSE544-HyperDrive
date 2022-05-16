@@ -23,18 +23,30 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 3. Clone the following repository
     ```
     git clone https://github.com/txie-93/cgcnn.git
-    ```
-4. Move into the "cgcnn" directory 
+   ```
+  
+   
+### Part II: Set up the repository
+
+ Now you have clone all the files you need from the original cgcnn project to train your model uing cif dataset to predit crystal properties from structure of the crystals. We we now start to make some minor changes so that we can utilize Azure Hyperdrive to autotune the hyperparameters for our training. 
+   There are two things we need to do:
+   A. Modify the training script so that we can get the dataset from Azure ML, and indicate the metrics to optimize. 
+   B. Generate a submisstion file to run the training as a Azure ML experiment, and identify the target hyperparameters we want to tune.  
+
+#### A Modify the training script 
+
+1. Move into the "cgcnn" directory 
     ```
     cd cgcnn
-    ````
-5. Starting at line 20 of the 'main.py' file, add the following two lines:
+    ```
+   In cgcnn directory, you have a main.py file, this the main model training file for cgcnn. Open this file using your VScode/open file, or any editor you prefer. 
+2. main.py is the file In the main.py file, we need to install azureml   Starting at line 20 of the 'main.py' file, add the following two lines:
     ```
     from azureml.core import Run
     run = Run.get_context()
     ```
     The 'run' variable will represent the run of your hyperdrive experiment and 'get_context' will return the current context for logging metrics. We will be looking at specifically the mean absolute error (see next step).
-6. Add the following line right before the 'else' statement in line 191:
+3. Add the following line right before the 'else' statement in line 191:
     ```
     run.log("MAE", np.float(mae_error.item()))
     ```
