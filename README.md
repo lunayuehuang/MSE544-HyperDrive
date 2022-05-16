@@ -2,7 +2,7 @@
 # MSE544-HyperDrive Experiment
 ## HyperDrive
 HyperDrive is a machine learning package found within Azure that aids in hyperparameter tuning/optimization. Hyperparameters are the parameters initialized before training that influence how the model trains and ultimately how the finished model performs. Examples of hyperparameters include: batch size, learning rate, number of layers in the neural network, the optimizer (e.g. Adam vs SGD), etc.\
-Typically, the objective, when hyperparameter tuning, is to find the combination of hyperparameters that gives the best performing model. Azure has developed a package to make this discovery process much easier.  
+Typically, the objective, when hyperparameter tuning, is to find the combination of hyperparameters that give the best performing model. Azure has developed a package to make this discovery process much easier.  
 This tutorial will walk you through how to set up and run this package to optimize a machine learning model. 
 ## Repository Background
 The framework presented in this work introduces the crystal graph convolution neural networks (CGCNN), which are designed to represent periodic crystal systems and predict material properties at DFT level accuracy and propose chemical insight. Read more about this study [here](https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.120.145301).  
@@ -12,7 +12,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 -----------------------------------
 ## Instructions
 ### Part I: Set up the repository
-1. Make a directory for this tutorial at your desired location on your computer. 
+1. Make a directory for this tutorial at the desired location on your computer. 
     ``` 
     mkdir MSE544-Hyperdrive
     ```
@@ -26,14 +26,14 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
    ```
   
    
-### Part II: Set up the repository
+### Part II: Modify the workflow
 
- Now you have clone all the files you need from the original cgcnn project to train your model uing cif dataset to predit crystal properties from structure of the crystals. We we now start to make some minor changes so that we can utilize Azure Hyperdrive to autotune the hyperparameters for our training. 
+ At this point, you have cloned all of the files you will need, from the original cgcnn project, to train your model using cif dataset to predit crystal properties from structure of the crystals. We will now start to make some minor changes so that we can utilize Azure Hyperdrive to autotune the hyperparameters for our training. 
    There are two things we need to do:
    
-   A. Modify the training script so that we can indicate the metrics to optimize. 
+   A. Modify the training script so that we can indicate the metrics to optimize 
    
-   B. Generate a submisstion file to run the training as a Azure ML experiment, and identify the target hyperparameters we want to tune, which will be indicated in part IV.   
+   B. Generate a submisstion file to run the training as a Azure ML experiment and identify the target hyperparameters we want to tune
 
 #### A Modify the training script 
 
@@ -42,13 +42,13 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     cd cgcnn
     ```
    In cgcnn directory, you have a main.py file, this the main model training file for cgcnn. Open this file using your VScode/Open file, or any editor you prefer. 
-2. In main.py we first need to import azureml library so that certain function. To make our file more consistant, please at the follwing two linse starting at line 20 of the 'main.py' file right after all the other imports: 
+2. In main.py we first need to import azureml library so we have access to certain function. To make our file more consistant, please add the follwing two linse starting at line 20 of the 'main.py' file right after all the other imports: 
     ```
     from azureml.core import Run
     run = Run.get_context()
     ```
-    The 'run' variable will represent the run of your hyperdrive experiment and 'get_context' will return the current context for logging metrics. We will be looking at specifically the mean absolute error (see next step).
-3. Then, we need to indicate what the metrics for us to track which sets of hyperparameters perform the best. In this experiment, we choose mae to be the metrics to optimize. In the main.py, search where best_mae_error is defined, the line looks like ```best_mae_error = min(mae_error, best_mae_error)```, right after that add the following line right before the 'else' statement   
+    The 'run' variable will represent the run of your hyperdrive experiment and 'get_context' will return the current context for logging metrics. We will be looking specifically at the mean absolute error (see next step).
+3. Next, we will indicate which metrics we wish to track in order to find the best performing set of hyperparameters; in this experiment, we will optimize the MAE metric. In the main.py, find where best_mae_error is defined, the line looks like ```best_mae_error = min(mae_error, best_mae_error)```, right after that, and immediately before the 'else' statement, add the following line: 
     ```
     run.log("MAE", np.float(mae_error.item()))
     ```
@@ -66,13 +66,13 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
 <img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
 
-2. Input all the information as shown in the screen shot below, indicate the url as ```https://mse544storage.blob.core.windows.net/hyperdrivetutorialdata```; subscription ID as ```MSE544 Big Data and Informatics (edf4ef8f-68cc-4a10-9dd5-821829ccba45)```; resource group is ```rg-amlclass-all```; and make sure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2020-08-04&ss=b&srt=co&sp=rlitfx&se=2022-07-02T02:55:20Z&st=2022-05-01T18:55:20Z&spr=https&sig=9P04kUW8p%2BsaX%2BJEkA%2FNNuWX1f7TNpOiKr1OS6dJARM%3D```, and then hit create. By creating a datastore, you link your workspace with an created storage account that already exists. In this way, multiple users can share the same data without having to copy the data intou your own workspace, therefore save the cost of data storage.  
+2. Input all the information as shown in the screen shot below, indicate the url as ```https://mse544storage.blob.core.windows.net/hyperdrivetutorialdata```; subscription ID as ```MSE544 Big Data and Informatics (edf4ef8f-68cc-4a10-9dd5-821829ccba45)```; resource group is ```rg-amlclass-all```; and make sure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2020-08-04&ss=b&srt=co&sp=rlitfx&se=2022-07-02T02:55:20Z&st=2022-05-01T18:55:20Z&spr=https&sig=9P04kUW8p%2BsaX%2BJEkA%2FNNuWX1f7TNpOiKr1OS6dJARM%3D```, and then hit create. By creating a datastore, you link your workspace with a storage account that already exists. In this way, multiple users can share the same data without having to copy the data into your own workspace, therefore saving the cost of data storage.  
 <img src="./images/Datastore_image1.png" style="height: 90%; width: 90%;"/>
 
-3. Now let's create a dataset from datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
+3. Now let's create a dataset from the datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
 <img src="./images/Datastore_image2.png" style="height: 90%; width: 90%;"/>
 
-4. Give a name to your dataset ```materials_hyperdrive_dataset", select Dataset type as "File" and hit Next
+4. Give a name to your dataset "materials_hyperdrive_dataset", select Dataset type as "File" and hit Next
 <img src="./images/Datastore_image3.png" style="height: 90%; width: 90%;"/>
 
 5. In the prompt of Select or create a datastore, choose "hyperdrivetutorial" from the pull down menu (Note, since you have already link your datastore to the storage account, you should be able to select this existing one), and then choose the path to be ** and unclick "Skip data validation" hit next 
@@ -89,10 +89,10 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 
 
 ### Part IV: Build the Notebook
-Now let's the part B of the hyperdrive process which is create a submission file for your AML experiment. 
+Now we have reached part B of the hyperdrive process, which is create a submission file for your AML experiment. 
 1. Make a jupyter notebook called "hyperdrive_experiment" 
     - make sure this notebook is in the same directory as the "main.py" python script
-2. Insert a cell with the following imports, make sure you have already ```pip install azureml-train``` for the kernel you have chosen. 
+2. Insert a cell with the following imports, make sure you have already run ```pip install azureml-train``` for the kernel you have chosen. 
     ```
     from azureml.core import Workspace, Experiment, Environment, ScriptRunConfig, Dataset, Run
     import azureml
@@ -102,7 +102,7 @@ Now let's the part B of the hyperdrive process which is create a submission file
     from azureml.train.hyperdrive import HyperDriveConfig, PrimaryMetricGoal
     ```
     From the core tools package, we will import the standard classes for running jobs on Azure then we will import tools specific for hyperdrive to fine-tune our experiment.
-3. Initialize a workspace in the next cell (be sure to enter the appropriate information), you can find the information in Azure ML portal, by choose dataset and click on the "consume" tab: 
+3. Initialize a workspace in the next cell (be sure to enter the appropriate information), you can find the information in Azure ML portal, by choosing dataset and click on the "consume" tab: 
     ```
     subscription_id = <INSERT your own info>
     resource_group  = <INSERT your own info>
