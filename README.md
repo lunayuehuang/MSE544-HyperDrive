@@ -33,7 +33,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
    
    A. Modify the training script so that we can indicate the metrics to optimize. 
    
-   B. Generate a submisstion file to run the training as a Azure ML experiment, and identify the target hyperparameters we want to tune.  
+   B. Generate a submisstion file to run the training as a Azure ML experiment, and identify the target hyperparameters we want to tune, which will be indicated in part IV.   
 
 #### A Modify the training script 
 
@@ -55,7 +55,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     This line is cruical for logging the metric (MAE) for your experiment running on AzureML using hyperdrive. 
 4. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
-### Part II: Create an AML dataset linked to an Azure storage account 
+### Part III: Create an AML dataset linked to an Azure storage account 
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
 <img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
 
@@ -81,7 +81,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 <img src="./images/Datastore_image8.png" style="height: 90%; width: 90%;"/>
 
 
-### Part III: Build the Notebook
+### Part IV: Build the Notebook
 1. Make a jupyter notebook called "hyperdrive_experiment" 
     - make sure this notebook is in the same directory as the "main.py" python script
 2. Insert a cell with the following imports
@@ -179,8 +179,8 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     print(aml_url)
     ```
 
-### Part III: Running the Experiment and Navigating Azure
-1. When you follow the url printed in step 9 of part II, you should find a page that looks something like this:
+### Part VI: Running the Experiment and Navigating Azure
+1. When you follow the url printed in step 9 of part III, you should find a page that looks something like this:
 <img src="./images/follow_url_notes.png" style="height: 90%; width: 90%;"/>
     <ol type="A">
     <li> Pathway to the experiment we are running</li> 
