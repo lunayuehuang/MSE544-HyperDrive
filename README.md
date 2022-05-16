@@ -31,7 +31,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
  Now you have clone all the files you need from the original cgcnn project to train your model uing cif dataset to predit crystal properties from structure of the crystals. We we now start to make some minor changes so that we can utilize Azure Hyperdrive to autotune the hyperparameters for our training. 
    There are two things we need to do:
    
-   A. Modify the training script so that we can get the dataset from Azure ML, and indicate the metrics to optimize. 
+   A. Modify the training script so that we can indicate the metrics to optimize. 
    
    B. Generate a submisstion file to run the training as a Azure ML experiment, and identify the target hyperparameters we want to tune.  
 
@@ -42,7 +42,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     cd cgcnn
     ```
    In cgcnn directory, you have a main.py file, this the main model training file for cgcnn. Open this file using your VScode/Open file, or any editor you prefer. 
-2. main.py is the we need to install azureml   Starting at line 20 of the 'main.py' file, add the following two lines:
+2. In main.py add the following     Starting at line 20 of the 'main.py' file, add the following two lines:
     ```
     from azureml.core import Run
     run = Run.get_context()
