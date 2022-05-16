@@ -48,18 +48,19 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     run = Run.get_context()
     ```
     The 'run' variable will represent the run of your hyperdrive experiment and 'get_context' will return the current context for logging metrics. We will be looking at specifically the mean absolute error (see next step).
-3. Then, we need to indicate what the metrics for us to track which sets of hyperparameters perform the best. In this experiment, we choose mae to be the metrics to optimize. In the main.py, search where best_mae_error is defined, the line looks like '''best_mae_error = min(mae_error, best_mae_error)''', right after that add the following line right before the 'else' statement   
+3. Then, we need to indicate what the metrics for us to track which sets of hyperparameters perform the best. In this experiment, we choose mae to be the metrics to optimize. In the main.py, search where best_mae_error is defined, the line looks like ```best_mae_error = min(mae_error, best_mae_error)```, right after that add the following line right before the 'else' statement   
     ```
     run.log("MAE", np.float(mae_error.item()))
     ```
-    This line is cruical for logging the metric (MAE) for your experiment running on AzureML using hyperdrive. 
-4. Download the .yml file from Canvas and place it in the "cgcnn" directory. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
+    This line is crucial for logging the metric (MAE) for your experiment running on AzureML using hyperdrive. 
+    Save your main.py file. 
+4. Download the .yml file from [Canvas](https://canvas.uw.edu/courses/1546761/files/91469595?wrap=1) and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 ### Part III: Create an AML dataset linked to an Azure storage account 
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
 <img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
 
-2. Input all the information as shown in the screen shot below, and makesure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2020-08-04&ss=b&srt=co&sp=rlitfx&se=2022-07-02T02:55:20Z&st=2022-05-01T18:55:20Z&spr=https&sig=9P04kUW8p%2BsaX%2BJEkA%2FNNuWX1f7TNpOiKr1OS6dJARM%3D```, and then hit create. By creating a datastore, you link your workspace with an created storage account that already exists. In this way, multiple users can share the same data without having to copy the data intou your own workspace, therefore save the cost of data storage.  
+2. Input all the information as shown in the screen shot below, indicate the url as ```https://mse544storage.blob.core.windows.net/hyperdrivetutorialdata```; subscription ID as ```MSE544 Big Data and Informatics (edf4ef8f-68cc-4a10-9dd5-821829ccba45)```; resource group is ```rg-amlclass-all```; and make sure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2020-08-04&ss=b&srt=co&sp=rlitfx&se=2022-07-02T02:55:20Z&st=2022-05-01T18:55:20Z&spr=https&sig=9P04kUW8p%2BsaX%2BJEkA%2FNNuWX1f7TNpOiKr1OS6dJARM%3D```, and then hit create. By creating a datastore, you link your workspace with an created storage account that already exists. In this way, multiple users can share the same data without having to copy the data intou your own workspace, therefore save the cost of data storage.  
 <img src="./images/Datastore_image1.png" style="height: 90%; width: 90%;"/>
 
 3. Now let's create a dataset from datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
