@@ -229,5 +229,5 @@ We encourage you to figure out how to do inference use the best model you saved 
 hint, by using the validate function in the main.py file, you can do inference on any input date. 
 
 # References
-I. [Hyperparameter tuning models using Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters#define-search-space)
+I. [Hyperparameter tuning models using Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters#define-search-space)\
 II. Xie, Tian, and Jeffrey C. Grossman. "Crystal graph convolutional neural networks for an accurate and interpretable prediction of material properties." Physical review letters 120, no. 14 (2018): 145301.
