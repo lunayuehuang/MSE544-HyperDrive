@@ -216,17 +216,19 @@ Once you have completed your experiment, you can go to ML studio and choose your
 <img src="./images/Evaluation2.png" style="height: 90%; width: 90%;"/>   
 
 By clicking the child run you can see all the child run that have been run in the experiment. You can compare each run's MAE and use tags to see the hyperparameters that were used in each child run. 
+
 <img src="./images/Evaluation3.png" style="height: 90%; width: 90%;"/> 
 
 By click the link to the "Best child run" from the summary page, you can see the results of the best performed child run. 
+
 <img src="./images/Evaluation2.5.png" style="height: 90%; width: 90%;"/>
 
 Then by selecting Output+logs, you can find the best saved model in outputs/model_best.pth.tar. Then you can click the 3 dots on the side of it to download the tar file for inference. 
 
 
 ### Stretch  Thoughts Practice, 
-We encourage you to figure out how to do inference use the best model you saved from your experience. 
-hint, by using the validate function in the main.py file, you can do inference on any input date. 
+We encourage you to figure out how to do inference using the best model you saved from your experiment. 
+Hint, you can use the "validate" function in the main.py file. 
 
 # References
 I. [Hyperparameter tuning models using Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters#define-search-space)\
