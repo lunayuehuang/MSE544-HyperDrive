@@ -24,7 +24,8 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     ```
     git clone https://github.com/txie-93/cgcnn.git
    ```
-  
+  This github repo is developed and maintained by Tian Xie from microsoft research which implements the Crystal Graph Convolutional Neural Networks that takes an arbitary crystal structure to predict material properties. this package provides two major functions: 1. train a CGCNN model with a customized dataset, 2. predict materials properties of new cyrstals with a pre-trained CGCNN model. 
+  In this tutorial, we use this model to demenstrate how we can make some minor changes to an existing model and train it on Azure AML, and utilize some AML functions to improve the efficiency of training. 
    
 ### Part II: Modify the workflow
 
