@@ -1,5 +1,8 @@
 
 # MSE544-HyperDrive Experiment
+
+Yiyang Ling, Alexis Mills, Luna Yue Huang 
+
 ## HyperDrive
 HyperDrive is a machine learning package found within Azure that aids in hyperparameter tuning/optimization. Hyperparameters are the parameters initialized before training that influence how the model trains and ultimately how the finished model performs. Examples of hyperparameters include: batch size, learning rate, number of layers in the neural network, the optimizer (e.g. Adam vs SGD), etc.\
 Typically, the objective, when hyperparameter tuning, is to find the combination of hyperparameters that give the best performing model. Azure has developed a package to make this discovery process much easier.  
