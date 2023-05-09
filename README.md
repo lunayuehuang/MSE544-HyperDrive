@@ -67,11 +67,12 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
    ```
 6. Download the .yml file from [here](https://github.com/lunayuehuang/MSE544-HyperDrive/blob/main/cgcnn_env.yml), click "raw " button to access the file and right click to save it and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
+
 ### Part III: Create an AML dataset linked to an Azure storage account 
 1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
 <img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
 
-2. Input all the information as shown in the screen shot below, indicate the url as ```https://mse544storage.blob.core.windows.net/hyperdrivetutorialdata```; subscription ID as ```MSE544 Big Data and Informatics (edf4ef8f-68cc-4a10-9dd5-821829ccba45)```; resource group is ```rg-amlclass-all```; and make sure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2022-11-02&ss=b&srt=sco&sp=rltf&se=2023-06-30T09:07:48Z&st=2023-05-09T01:07:48Z&spr=https&sig=n1izDUHsLBfAZHbyanaoJ%2Fw40hIRw8B4tZM4TfHZq7o%3D```, and then hit create. By creating a datastore, you link your workspace with a storage account that already exists. In this way, multiple users can share the same data without having to copy the data into your own workspace, therefore saving the cost of data storage.  
+2. Input all the information as shown in the screen shot below, indicate the url as ```https://mse544storage.blob.core.windows.net/hyperdrivetutorialdata```; subscription ID as ```MSE544 2023```; resource group is ```rg-amlclass-all```; and make sure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2022-11-02&ss=b&srt=sco&sp=rltf&se=2023-06-30T09:07:48Z&st=2023-05-09T01:07:48Z&spr=https&sig=n1izDUHsLBfAZHbyanaoJ%2Fw40hIRw8B4tZM4TfHZq7o%3D```, and then hit create. By creating a datastore, you link your workspace with a storage account that already exists. In this way, multiple users can share the same data without having to copy the data into your own workspace, therefore saving the cost of data storage.  
 <img src="./images/Datastore_image1.png" style="height: 90%; width: 90%;"/>
 
 3. Now let's create a dataset from the datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
