@@ -65,7 +65,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
       # to the outputs folder so we can use them later for inference.
       os.system('cp *.pth.tar ./outputs/') 
    ```
-6. Download the .yml file from [here](https://github.com/lunayuehuang/MSE544-HyperDrive/blob/main/cgcnn_env.yml), click "raw " button to access the file and right click to save it and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
+6. Download the .yml file from [here](https://github.com/lunayuehuang/MSE544-HyperDrive/blob/main/cgcnn_env.yml), click "Download raw file" button to save it and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 
 ### Part III: Create an AML dataset linked to an Azure storage account 
