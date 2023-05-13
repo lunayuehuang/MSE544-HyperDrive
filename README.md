@@ -110,9 +110,9 @@ Now we have reached part B of the hyperdrive process, which is create a submissi
     From the core tools package, we will import the standard classes for running jobs on Azure then we will import tools specific for hyperdrive to fine-tune our experiment.
 3. Initialize a workspace in the next cell (be sure to enter the appropriate information), you can find the information in Azure ML portal, by choosing dataset and click on the "consume" tab: 
     ```
-    subscription_id = <INSERT your own info>
-    resource_group  = <INSERT your own info>
-    workspace_name  = <INSERT your own info>
+    subscription_id = "<INSERT your own info>"
+    resource_group  = "<INSERT your own info>"
+    workspace_name  = "<INSERT your own info>"
     ws = Workspace(subscription_id, resource_group, workspace_name)
     experiment = Experiment(workspace=ws, name='hyperdrive_experiment')
     ```
