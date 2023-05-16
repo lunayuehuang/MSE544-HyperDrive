@@ -68,16 +68,16 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 6. Download the .yml file from [here](https://github.com/lunayuehuang/MSE544-HyperDrive/blob/main/cgcnn_env.yml), click "raw " button to access the file and right click to save it and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 
-### Part III: Create an AML dataset linked to an Azure storage account 
-1. download the hyperdrive_data.tar file in this repo, and extend the tar file into a folder in your current working folder. 
+### Part III: Create an AML data asset and upload files from local
+ 
+1. Download hyperdrive_data.tar from [here](./hyperdrive_data.tar) by clicking download button, then untar it locally. You would get a folder named ```DataSet```.
 
-2.  Create a new dataset (in Azure called data asset) in your aml workspace following the instructions similar to the Step A of MSE544_ObjectDetectionWithYoloV5(```https://github.com/lunayuehuang/MSE544_ObjectDetectionWithYoloV5/blob/main/README.md```), at the Data type step, name your data asset as ```materials_hyperdrive_dataset```, chose file type as File(from Azure ML v1 APIs), and choose From Local Files" in the data source step. For storage type, choose Azure Blob Storage, chose the default blob datastore that associate with your data storage account in your resource group. In the upload step, browse into the folder you just un-tar, and select all files in that folder, and click upload. The upload might take several minutes to 10 minutes depends on the network. 
+2. Now let's create a dataset by uploading files from local just like what you did in [yolov5 tutorial](https://lunayuehuang.github.io/MSE544_ObjectDetectionWithYoloV5/#part2_stepa). Name the data asset ```materials_hyperdrive_dataset```, fill the description with ```the dataset for cgcnn project```. Then choose upload from local files, choose your datasote type as ```Azure Blob Storage```, choose your default datastore. If it doesn't work, [create one by yourself](https://github.com/lunayuehuang/MSE544_ObjectDetectionWithYoloV5/blob/main/troubleshooting.md). Click ```Upload``` and choose ```Upload folder```, choose the folder you untarred in step 1, this would take you a few minutes. Tips: Azure imposes a limit on the number of files you can upload, so selecting ```Upload files``` may prevent you from uploading the whole dataset. After you upload all the files, click ```Create``` to create the new Data asset.
 
-
-3. After completion, if you go back to your ML workspace home and click datasets, you will be able to see the one you just created. 
+3. Now if you go back to your ML workspace home and click data assets, you will be able to see the one you just created. 
 <img src="./images/Datastore_image7.png" style="height: 90%; width: 90%;"/>
 
-4. Click the dataset, and click explore, you can see preview the files in your dataset. 
+4. Click the data asset, and click explore, you can see preview the files in your dataset. 
 <img src="./images/Datastore_image8.png" style="height: 90%; width: 90%;"/>
 
 
@@ -188,7 +188,7 @@ Now we have reached part B of the hyperdrive process, which is create a submissi
     <li> Name of the current experiment - this is easily edited to something more meaningful by selecting the pencil symbol</li>
     <li> Tab showing the various runs that will be submitted during the experiment</li>
     </ol>
-2. Select the "child runs" tab to view the following page:
+2. Select the "Trials" tab to view the following page:
 <img src="./images/child_runs_notes.png" style="height: 90%; width: 90%;"/>
     <ol type="A">
     <li> Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. </li>
@@ -196,7 +196,7 @@ Now we have reached part B of the hyperdrive process, which is create a submissi
     <li> Chart correlating the hyperparameters selected for each run and the calculated MAE </li>
         - select the drop-down menu right above this plot to visualize the data in different dimensions
     </ol>
-3. Select one of your child runs to further investigate by clicking on the display name
+3. Select one of your trials to further investigate by clicking on the display name
 <img src="./images/single_child_run_notes.png" style="height: 90%; width: 90%;"/>
 We find a lot of useful information here 
     <ol type="A">
@@ -208,11 +208,11 @@ We find a lot of useful information here
 Once you have completed your experiment, you can go to ML studio and choose your experiment and choose a completed run to see evaluate the results as shown
 <img src="./images/Evaluation2.png" style="height: 90%; width: 90%;"/>   
 
-By clicking the child run you can see all the child run that have been run in the experiment. You can compare each run's MAE and use tags to see the hyperparameters that were used in each child run. 
+By clicking the Trials you can see all the trials that have been run in the experiment. You can compare each run's MAE and use tags to see the hyperparameters that were used in each trial. 
 
 <img src="./images/Evaluation3.png" style="height: 90%; width: 90%;"/> 
 
-By click the link to the "Best child run" from the summary page, you can see the results of the best performed child run. 
+By click the link to the "Best trial" from the summary page, you can see the results of the best performed trial. 
 
 <img src="./images/Evaluation2.5.png" style="height: 90%; width: 90%;"/>
 
