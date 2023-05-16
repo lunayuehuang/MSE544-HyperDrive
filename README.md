@@ -196,7 +196,7 @@ Now we have reached part B of the hyperdrive process, which is create a submissi
     <li> Chart correlating the hyperparameters selected for each run and the calculated MAE </li>
         - select the drop-down menu right above this plot to visualize the data in different dimensions
     </ol>
-3. Select one of your tirals to further investigate by clicking on the display name
+3. Select one of your trials to further investigate by clicking on the display name
 <img src="./images/single_child_run_notes.png" style="height: 90%; width: 90%;"/>
 We find a lot of useful information here 
     <ol type="A">
@@ -208,11 +208,11 @@ We find a lot of useful information here
 Once you have completed your experiment, you can go to ML studio and choose your experiment and choose a completed run to see evaluate the results as shown
 <img src="./images/Evaluation2.png" style="height: 90%; width: 90%;"/>   
 
-By clicking the child run you can see all the child run that have been run in the experiment. You can compare each run's MAE and use tags to see the hyperparameters that were used in each child run. 
+By clicking the Trials you can see all the trials that have been run in the experiment. You can compare each run's MAE and use tags to see the hyperparameters that were used in each trial. 
 
 <img src="./images/Evaluation3.png" style="height: 90%; width: 90%;"/> 
 
-By click the link to the "Best child run" from the summary page, you can see the results of the best performed child run. 
+By click the link to the "Best trial" from the summary page, you can see the results of the best performed trial. 
 
 <img src="./images/Evaluation2.5.png" style="height: 90%; width: 90%;"/>
 
