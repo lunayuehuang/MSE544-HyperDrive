@@ -69,28 +69,15 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 
 ### Part III: Create an AML dataset linked to an Azure storage account 
-1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
-<img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
+1. download the hyperdrive_data.tar file in this repo, and extend the tar file into a folder in your current working folder. 
 
-2. Input all the information as shown in the screen shot below, indicate the url as ```https://mse544storage.blob.core.windows.net/hyperdrivetutorialdata```; subscription ID as ```MSE544 2023```; resource group is ```rg-amlclass-all```; and make sure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2022-11-02&ss=b&srt=sco&sp=rltf&se=2023-06-30T09:07:48Z&st=2023-05-09T01:07:48Z&spr=https&sig=n1izDUHsLBfAZHbyanaoJ%2Fw40hIRw8B4tZM4TfHZq7o%3D```, and then hit create. By creating a datastore, you link your workspace with a storage account that already exists. In this way, multiple users can share the same data without having to copy the data into your own workspace, therefore saving the cost of data storage.  
-<img src="./images/Datastore_image1.png" style="height: 90%; width: 90%;"/>
+2.  Create a new dataset (in Azure called data asset) in your aml workspace following the instructions similar to the Step A of MSE544_ObjectDetectionWithYoloV5(```https://github.com/lunayuehuang/MSE544_ObjectDetectionWithYoloV5/blob/main/README.md```), at the Data type step, name your data asset as ```materials_hyperdrive_dataset```, chose file type as File(from Azure ML v1 APIs), and choose From Local Files" in the data source step. For storage type, choose Azure Blob Storage, chose the default blob datastore that associate with your data storage account in your resource group. In the upload step, browse into the folder you just un-tar, and select all files in that folder, and click upload. The upload might take several minutes to 10 minutes depends on the network. 
 
-3. Now let's create a dataset from the datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
-<img src="./images/Datastore_image2.png" style="height: 90%; width: 90%;"/>
 
-4. Give a name to your dataset "materials_hyperdrive_dataset", select Dataset type as "File" and hit Next
-<img src="./images/Datastore_image3.png" style="height: 90%; width: 90%;"/>
-
-5. In the prompt of Select or create a datastore, choose "hyperdrivetutorial" from the pull down menu (Note, since you have already link your datastore to the storage account, you should be able to select this existing one), and then choose the path to be ** and unclick "Skip data validation" hit next 
-<img src="./images/Datastore_image5.png" style="height: 90%; width: 90%;"/>
-
-6. Double check the informaiton and hit Create
-<img src="./images/Datastore_image6.png" style="height: 90%; width: 90%;"/>
-
-7. Now if you go back to your ML workspace home and click datasets, you will be able to see the one you just created. 
+3. After completion, if you go back to your ML workspace home and click datasets, you will be able to see the one you just created. 
 <img src="./images/Datastore_image7.png" style="height: 90%; width: 90%;"/>
 
-8. Click the dataset, and click explore, you can see preview the files in your dataset. 
+4. Click the dataset, and click explore, you can see preview the files in your dataset. 
 <img src="./images/Datastore_image8.png" style="height: 90%; width: 90%;"/>
 
 
