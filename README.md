@@ -188,7 +188,7 @@ Now we have reached part B of the hyperdrive process, which is create a submissi
     <li> Name of the current experiment - this is easily edited to something more meaningful by selecting the pencil symbol</li>
     <li> Tab showing the various runs that will be submitted during the experiment</li>
     </ol>
-2. Select the "child runs" tab to view the following page:
+2. Select the "Trials" tab to view the following page:
 <img src="./images/child_runs_notes.png" style="height: 90%; width: 90%;"/>
     <ol type="A">
     <li> Lists the subsequent runs within my experiment and provides relevant information such as: name of the run, status (pending, queued, complete), mean absolute error (MAE), duration of the run, batch size, time submitted. Notice the small arrow next to MAE, which indicates that I have sorted my runs based on the resulting MAE value. </li>
@@ -196,7 +196,7 @@ Now we have reached part B of the hyperdrive process, which is create a submissi
     <li> Chart correlating the hyperparameters selected for each run and the calculated MAE </li>
         - select the drop-down menu right above this plot to visualize the data in different dimensions
     </ol>
-3. Select one of your child runs to further investigate by clicking on the display name
+3. Select one of your tirals to further investigate by clicking on the display name
 <img src="./images/single_child_run_notes.png" style="height: 90%; width: 90%;"/>
 We find a lot of useful information here 
     <ol type="A">
