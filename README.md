@@ -65,32 +65,19 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
       # to the outputs folder so we can use them later for inference.
       os.system('cp *.pth.tar ./outputs/') 
    ```
-6. Download the .yml file from [here](https://github.com/lunayuehuang/MSE544-HyperDrive/blob/main/cgcnn_env.yml), click "Download raw file" button to save it and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
+6. Download the .yml file from [here](https://github.com/lunayuehuang/MSE544-HyperDrive/blob/main/cgcnn_env.yml), click "raw " button to access the file and right click to save it and place it in the same directory as the main.py file. The .yml (sometimes seen as .yaml) file is a special file typically used for configuring environments/settings for programs. Files with this extension are intended to be human-readable.
     FUN FACT: YAML initially stood for, *Yet Another Markdown Language*
 
-### Part III: Create an AML dataset linked to an Azure storage account 
-1. Create a data store in your ML workspace by click create/datastore from the homepage of ML studio, make sure you are in your workspace for this class. 
-<img src="./images/Datastore_image0.png" style="height: 90%; width: 90%;"/>
+### Part III: Create an AML data asset and upload files from local
+ 
+1. Download hyperdrive_data.tar from [here](./hyperdrive_data.tar) by clicking download button, then untar it locally. You would get a folder named ```DataSet```.
 
-2. Input all the information as shown in the screen shot below, indicate the url as ```https://mse544storage.blob.core.windows.net/hyperdrivetutorialdata```; subscription ID as ```MSE544 2023```; resource group is ```HyperDriveStorage```; and make sure you choose authentication type as SAS token (SAS aka Shared Access Signature), and copy paste SAS token ```?sv=2022-11-02&ss=b&srt=sco&sp=rltf&se=2023-06-30T09:07:48Z&st=2023-05-09T01:07:48Z&spr=https&sig=n1izDUHsLBfAZHbyanaoJ%2Fw40hIRw8B4tZM4TfHZq7o%3D```, and then hit create. By creating a datastore, you link your workspace with a storage account that already exists. In this way, multiple users can share the same data without having to copy the data into your own workspace, therefore saving the cost of data storage.  
-<img src="./images/Datastore_image1.png" style="height: 90%; width: 90%;"/>
+2. Now let's create a dataset by uploading files from local just like what you did in [yolov5 tutorial](https://lunayuehuang.github.io/MSE544_ObjectDetectionWithYoloV5/#part2_stepa). Name the data asset ```materials_hyperdrive_dataset```, fill the description with ```the dataset for cgcnn project```. Then choose upload from local files, choose your datasote type as ```Azure Blob Storage```, choose your default datastore. If it doesn't work, [create one by yourself](https://github.com/lunayuehuang/MSE544_ObjectDetectionWithYoloV5/blob/main/troubleshooting.md). Click ```Upload``` and choose ```Upload folder```, choose the folder you untarred in step 1, this would take you a few minutes. Tips: Azure imposes a limit on the number of files you can upload, so selecting ```Upload files``` may prevent you from uploading the whole dataset. After you upload all the files, click ```Create``` to create the new Data asset.
 
-3. Now let's create a dataset from the datastore. In your ML studio home, click "Datasets"/"Create dataset"/"From datastore" 
-<img src="./images/Datastore_image2.png" style="height: 90%; width: 90%;"/>
-
-4. Give a name to your dataset "materials_hyperdrive_dataset", select Dataset type as "File" and hit Next
-<img src="./images/Datastore_image3.png" style="height: 90%; width: 90%;"/>
-
-5. In the prompt of Select or create a datastore, choose "hyperdrivetutorial" from the pull down menu (Note, since you have already link your datastore to the storage account, you should be able to select this existing one), and then choose the path to be ** and unclick "Skip data validation" hit next 
-<img src="./images/Datastore_image5.png" style="height: 90%; width: 90%;"/>
-
-6. Double check the informaiton and hit Create
-<img src="./images/Datastore_image6.png" style="height: 90%; width: 90%;"/>
-
-7. Now if you go back to your ML workspace home and click datasets, you will be able to see the one you just created. 
+3. Now if you go back to your ML workspace home and click data assets, you will be able to see the one you just created. 
 <img src="./images/Datastore_image7.png" style="height: 90%; width: 90%;"/>
 
-8. Click the dataset, and click explore, you can see preview the files in your dataset. 
+4. Click the data asset, and click explore, you can see preview the files in your dataset. 
 <img src="./images/Datastore_image8.png" style="height: 90%; width: 90%;"/>
 
 
@@ -110,9 +97,9 @@ Now we have reached part B of the hyperdrive process, which is create a submissi
     From the core tools package, we will import the standard classes for running jobs on Azure then we will import tools specific for hyperdrive to fine-tune our experiment.
 3. Initialize a workspace in the next cell (be sure to enter the appropriate information), you can find the information in Azure ML portal, by choosing dataset and click on the "consume" tab: 
     ```
-    subscription_id = <INSERT your own info>
-    resource_group  = <INSERT your own info>
-    workspace_name  = <INSERT your own info>
+    subscription_id = "<INSERT your own info>"
+    resource_group  = "<INSERT your own info>"
+    workspace_name  = "<INSERT your own info>"
     ws = Workspace(subscription_id, resource_group, workspace_name)
     experiment = Experiment(workspace=ws, name='hyperdrive_experiment')
     ```
