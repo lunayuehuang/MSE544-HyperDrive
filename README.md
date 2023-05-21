@@ -70,7 +70,7 @@ A collection of 3,207 .cif crystal structures have been extracted from the "mate
 
 ### Part III: Create an AML data asset and upload files from local
  
-1. Download hyperdrive_data.tar from [here](./hyperdrive_data.tar) by clicking download button, then untar it locally. You would get a folder named ```DataSet```.
+1. Download hyperdrive_data.tar from [here](./hyperdrive_data.tar) by clicking download button, then untar it locally. You would get a folder named ```DataSet```. Note, please put the this dataset somewhere outside of your directory of /MSE544-Hyperdrive
 
 2. Now let's create a dataset by uploading files from local just like what you did in [yolov5 tutorial](https://lunayuehuang.github.io/MSE544_ObjectDetectionWithYoloV5/#part2_stepa). Name the data asset ```materials_hyperdrive_dataset```, fill the description with ```the dataset for cgcnn project```. Then choose upload from local files, choose your datasote type as ```Azure Blob Storage```, choose your default datastore. If it doesn't work, [create one by yourself](https://github.com/lunayuehuang/MSE544_ObjectDetectionWithYoloV5/blob/main/troubleshooting.md). Click ```Upload``` and choose ```Upload folder```, choose the folder you untarred in step 1, this would take you a few minutes. Tips: Azure imposes a limit on the number of files you can upload, so selecting ```Upload files``` may prevent you from uploading the whole dataset. After you upload all the files, click ```Create``` to create the new Data asset.
 
